@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+    <title>Data Visualization Assignment</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- three.js importmap -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://ga.jspm.io/npm:three@0.158.0/build/three.module.js",
+                "OrbitControls": "https://ga.jspm.io/npm:three@0.158.0/examples/jsm/controls/OrbitControls.js",
+                "lil-gui": "https://ga.jspm.io/npm:lil-gui@0.19.1/dist/lil-gui.esm.js"
+            }
+        }
+    </script>
+
+    <!-- dataviz 1 -->
+    <script src="script.js" type="module"></script>
+
+    <!-- dataviz 2 -->
+    <script src="script2.js" type="module"></script>
+</head>
+<body>
+    <h1>My Amazing essay <i>A Bad Case of Stripes</i></h1>
+    <h2>Aly Aly</h2>
+
+    <p>The book that I choose to analyze for this text visualization is <i>"A Bad Case of Stripes"</i> by David Shannon. This children’s book sends a great message about the value of authenticity and the critical issues of social pressure around humans. I think this book will be a great text to visualize because of the message and the stunning colours that represent the vivid visual images in the book. Since it’s a book for children, this particular book can also relate to teenagers and adults from their early years of childhood development and personal issues, it provides a great frame for exploring acceptance and identity through programming. To give a brief summary of the story, it starts off with a young girl named Camilla Cream. She is very insecure about her personality and always anxious about what other people think of her. When she gets ready for her first day of school, she gets covered in rainbow stripes. She has attempted multiple ways to get rid of her stripes to no avail which caused her stripes to even grow further and get worse as per advice from her fellow family doctor. In the end of the story, her stripes eventually went away when she admitted that she likes lima beans in which an old lady visited her house for a “cure”. Her admission of liking lima beans was a suppression in which she fears that she may not be liked for it. Her retransformation conveys Camilla’s consciousness returning back to reality when she realizes the negative aspects of people-pleasing and other individual’s opinions.
+
+        I choose this book in particular out of any other modern books because this book was a big part of my childhood in which I experience nostalgia from. Not only that, but it is also a very straightforward story for children to enjoy and to learn from. The way Camilla’s skin changes in the story makes a great opportunity for a graphical representation in the assignment. By using Three.Js, HTML, and CSS we can create a theme of acceptance and visualize different colours. 
+        </p>
+
+    <p>The first visualization of Camilla’s Text will change Camilla’s physical changes into a 3D Model in which each color and pattern creates a specific moment in the story. For example, we can create a visualization of Camilla transforming into her stripe appearance when she’s nervous which visualizes her fears with terms like (“stripes, beans, fear”). The UI will allow the viewers to interact with the timeline, they can observe how outside opinions influence her appearance, directly linking into how her pressures change her identity. Each part of the body could represent peer pressure, family expectations and her insecurities. 
+
+        In addition, the 3D Model is used in the visualization to depict Camilla’s overwhelming nature of her case. It shows how deeply external opinions can influence her mind affecting her reputation. The shifting patterns and colours are portrayed as a metaphor for the process of her transformation. 
+        
+        </p>
+
+    <!-- dataviz 1 -->
+    <div class="canvas-container">
+        <h2>Camilla's fears in <i>A Bad Case of Stripes</i></h2>
+        <!--
+        <ul>
+            <li id="red">Cupboard</li>
+            <li id="green">Hat</li>
+            <li id="blue">Broom</li>
+        </ul>
+    -->
+        <canvas class="webgl"></canvas>
+        <div id="parent1"></div>
+        <p>Left click and drag to rotate. Right click and drag to move. Scroll to zoom.</p>
+    </div>
+
+    <p>For the second visualization, we will create a thing similar to the first visualization but with a different shape of the 3D space of the first visualization, describing when and how often key terms pop up often in the story like (dark, doctor, lady). With each mention of the words, a line representing the term will grow bigger in size. This will make the viewers/audience identify the theme in the text about character mentions. 
+
+        For the second visualizations, users can scroll along the timeline to follow the character mention curve. Alongside with the points on the graph, clicking on them can display the tooltips providing the exact number of mentions that come up in a point in which the mention occurs.
+        
+        </p>
+
+    <p>Interpreting the Visualization: Interpreting and analyzing the information that viewers can see on the screen which is the UI. The terms for the first and second visualization will co-relate to the colors I picked regardless of rainbow stripes, fear for red, beans for green.
+        Visual Communication: The book’s beginning will be on the left of the x axis, as it is usually like this at the start of a book. This example represents a linear flow of information. Variations in the line indicate shifts in the narrative’s attention on the characters. 
+        
+        The focus shift for the words such as “stripes” is high at the beginning of the book, but goes low for example in the middle, it suggests that Camilla’s stripes are apparent in the beginning of the story.
+        
+         For the character importance in the visualization, analyzing and visualizing Camila’s character by comparing the lines. For example, “beans” could have fewer peaks than “stripes” indicating that the word “stripes” has a more significant role. 
+        
+        The differences between the first visualization and the second visualization uses spheres to represent phrase mentions at random places in the visualization. The second visualization will have different key terms and will show data in another complete shape than the first visualization to make it differentiable. The data visualization for the first one will be about the sphere density and grouping. For the second one, it will provide another similar visualization but with different terms and more clear understanding of why I choose those certain terms. For the interactivity part of the visualization is to see the representation of the words. As for the second one, this one talks about the context that is directly related to the text when you click on the words and rotate the camera.
+        </p>
+
+    <!-- dataviz 2 -->
+    <div class="canvas-container">
+        <h2>Camilla finding her true self<i> in A Bad Case of Stripes</i></h2>
+        <canvas class="webgl2"></canvas>
+        <div id="parent2"></div>
+        <p>Left click and drag to rotate. Right click and drag to move. Scroll to zoom.</p>
+    </div>
+
+    <p>In conclusion, what I could have done better is that I would have loved to add real-time text analysis which makes the visualization more unique as more text could be read and entered by the viewers which could make it more visually appealing. Another thing that I could have done better in this assignment is that I would have added more interactive elements like the ability to click on it on the shapes that make it turn a different colours and add comparative modes to overlay text. Lastly, what I could have done is make the visualization have more UI elements. 
+    </p>
+    
+</body>

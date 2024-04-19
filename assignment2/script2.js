@@ -2,6 +2,8 @@ import * as THREE from "three"
 import * as dat from "lil-gui"
 import { OrbitControls } from "OrbitControls"
 
+
+
 /**********
 ** SETUP **
 ***********/
@@ -16,7 +18,7 @@ const sizes = {
 ** SCENE **
 ***********/
 // Canvas
-const canvas = document.querySelector('.webgl')
+const canvas = document.querySelector('.webgl2')
 
 // Scene
 const scene = new THREE.Scene()
@@ -54,33 +56,33 @@ scene.add(directionalLight)
 ** MESHES **
 ************/
 // Sphere Geometry
-const sphereGeometry = new THREE.SphereGeometry(0.5)
+const coneGeometry = new THREE.ConeGeometry( 1, 2, 4 );
 
-// Cube Materials
-const redMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('#E08824')
+// Sphere Materials
+const orangeMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('#1C1C1C')
 })
-const greenMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('#3ED42A')
+const pinkMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('#F2F0F0')
 })
-const blueMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('#8F1711')
+const aquaMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('#D620B5')
 })
 
 const drawSphere = (i, material) =>
 {
-    const sphere = new THREE.Mesh(sphereGeometry, material)
-    sphere.position.x = (Math.random() - 0.5) * 10
-    sphere.position.z = (Math.random() - 0.5) * 10
-    sphere.position.y = i - 10
+    const cone = new THREE.Mesh(coneGeometry, material)
+    cone.position.x = (Math.random() - 0.5) * 10
+    cone.position.z = (Math.random() - 0.5) * 10
+    cone.position.y = i - 10
 
-    sphere.rotation.x = Math.random() * 2 * Math.PI
-    sphere.rotation.y = Math.random() * 2 * Math.PI
-    sphere.rotation.z = Math.random() * 2 * Math.PI
+    cone.rotation.x = Math.random() * 2 * Math.PI
+    cone.rotation.y = Math.random() * 2 * Math.PI
+    cone.rotation.z = Math.random() * 2 * Math.PI
 
-    sphere.randomizer = Math.random()
+    cone.randomizer = Math.random()
 
-    scene.add(sphere)
+    scene.add(cone)
 }
 
 
@@ -92,10 +94,11 @@ let preset = {}
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'stripes',
-    term2: 'beans',
-    term3: 'fear',
-    rotateCamera: false
+    term1: 'sadness',
+    term2: 'doctor',
+    term3: 'lady',
+    rotateCamera: false,
+    animateBubbles: false
 }
 
 // Text Parsers
@@ -111,13 +114,13 @@ const parseTextandTerms = () =>
     //console.log(uiobj.textArray)
 
     // Find term 1
-    findTermInParsedText(uiobj.term1, redMaterial)
+    findTermInParsedText(uiobj.term1, orangeMaterial)
 
     // Find term 2
-    findTermInParsedText(uiobj.term2, greenMaterial)
+    findTermInParsedText(uiobj.term2, pinkMaterial)
 
     // Find term 3
-    findTermInParsedText(uiobj.term3, blueMaterial)
+    findTermInParsedText(uiobj.term3, aquaMaterial)
 
 }
 
@@ -132,7 +135,7 @@ const findTermInParsedText = (term, material) =>
          // convert i into n, which is a value between 0 and 20
          const n = (100 / uiobj.textArray.length) * i * 0.2
          
-         // call drawCube function 5 times using converted n value
+         // call drawsphere function 5 times using converted n value
          for(let a=0; a < 5; a++)
          {
             drawSphere(n, material)
@@ -154,24 +157,28 @@ fetch('https://aliassem336.github.io/IASC-2P02/assignment2/assets/Stripes.txt')
 
 // UI
 const ui = new dat.GUI({
-    container: document.querySelector('#parent1')
+    container: document.querySelector('#parent2')
 })
 
 // Interaction Folders
-    // Cubes Folder
-    const cubesFolder = ui.addFolder('Filter Terms')
+    // spheres Folder
+    const conesFolder = ui.addFolder('Filter Terms')
 
-    cubesFolder
-        .add(redMaterial, 'visible')
+    conesFolder
+        .add(orangeMaterial, 'visible')
         .name(`${uiobj.term1}`)
 
-    cubesFolder
-        .add(greenMaterial, 'visible')
+        conesFolder
+        .add(pinkMaterial, 'visible')
         .name(`${uiobj.term2}`)
 
-    cubesFolder
-        .add(blueMaterial, 'visible')
+        conesFolder
+        .add(aquaMaterial, 'visible')
         .name(`${uiobj.term3}`)
+
+        conesFolder
+        .add(uiobj, 'animateBubbles')
+        .name('Animate Cones')
 
     // Camera Folder
     const cameraFolder = ui.addFolder('Camera')
@@ -184,6 +191,7 @@ const ui = new dat.GUI({
 ** ANIMATION LOOP **
 ********************/
 const clock = new THREE.Clock()
+console.log(scene.children)
 
 // Animate
 const animation = () =>
@@ -199,6 +207,19 @@ const animation = () =>
     {
         camera.position.x = Math.sin(elapsedTime * 0.2) * 16
         camera.position.z = Math.cos(elapsedTime * 0.2) * 16
+    }
+
+    // Animate Bubbles
+    if(uiobj.animateBubbles){
+        for(let i=0; i < scene.children.length; i++)
+        {
+            if(scene.children[i].type === "Mesh")
+            {
+                scene.children[i].rotation.x = Math.sin(elapsedTime * 0.5 * 4 * scene.children[i].randomizer)
+                scene.children[i].rotation.y = Math.sin(elapsedTime * 0.5 * 4 * scene.children[i].randomizer)
+                scene.children[i].scale.z = Math.sin(elapsedTime * scene.children[i].randomizer)
+            }
+        }
     }
 
     // Renderer
